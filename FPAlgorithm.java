@@ -96,13 +96,14 @@ public class FPAlgorithm {
 
         fp_growth(root, null, headOfNodeLink);
         System.out.println("Execution time in milliseconds: " + (System.nanoTime() - startTime) / 1000000);
-        answer.entrySet().stream()
-                .sorted(Comparator.comparingDouble(e -> (double) e.getValue() / row))
-                .forEach(e -> {
-                    String items = String.join(", ", e.getKey());
-                    double support = (double) e.getValue() / row;
-                    System.out.printf("%s %f\n", items, support);
-                });
+        // answer.entrySet().stream()
+        //         .sorted(Comparator.comparingDouble(e -> (double) e.getValue() / finalRow))
+        //         .forEach(e -> {
+        //             String items = String.join(", ", e.getKey());
+        //             double support = (double) e.getValue() / finalRow;
+        //             System.out.printf("%s %f\n", items, support);
+        //         });
+        System.out.println(answer.size());
     }
 
     private static void insert_tree(String p, List<String> P, Node T, Map<String, Node> headOfNodeLink) {

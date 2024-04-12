@@ -19,9 +19,9 @@ public class Apriori {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             while ((line = br.readLine()) != null) {
                 row++;
-                String[] items = line.split(",");
-                D.add(Arrays.stream(items)
-                        .collect(Collectors.toCollection(HashSet::new)));
+                HashSet<String> items = Arrays.stream(line.split(","))
+                        .collect(Collectors.toCollection(HashSet::new));
+                D.add(items);
                 for (String item : items) {
                     counter.compute(item, (key, val) -> val == null ? 1 : val + 1);
                 }
@@ -55,13 +55,14 @@ public class Apriori {
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         }
         System.out.println("Execution time in milliseconds: " + (System.nanoTime() - startTime) / 1000000);
-        answer.entrySet().stream()
-                .sorted(Comparator.comparingDouble(e -> (double) e.getValue() / finalRow))
-                .forEach(e -> {
-                    String items = String.join(", ", e.getKey());
-                    double support = (double) e.getValue() / finalRow;
-                    System.out.printf("%s %f\n", items, support);
-                });
+        // answer.entrySet().stream()
+        //         .sorted(Comparator.comparingDouble(e -> (double) e.getValue() / finalRow))
+        //         .forEach(e -> {
+        //             String items = String.join(", ", e.getKey());
+        //             double support = (double) e.getValue() / finalRow;
+        //             System.out.printf("%s %f\n", items, support);
+        //         });
+        System.out.println(answer.size());
     }
 
     public static Map<HashSet<String>, Integer> aprioriGen(Map<HashSet<String>, Integer> Lkm1) {
